@@ -13,7 +13,7 @@ export const axiosInstance = axios.create({
         "sec-fetch-site": "same-origin",
         "sec-fetch-user": "?1",
         "upgrade-insecure-requests": "1",
-        "cookie": "_ga=GA1.1.974410053.1677012331; __cf_bm=zJ_SztVIfIiapBAND07FJ8t_b89Rx.c7UyLCRnAH83w-1677012333-0-AfZLCL6Gek3xscunxDcQveNMtxC7m1yOhzpHP3Lpz774+rT/lB8TgdjJpZLaWYBiux0SlNhco6iKrlPjGRPc1DKJrFTNdrrMhyJCrcKAl1ZPjPY24NHr1ovD3RugRU4xqHyRq8Wo6TES9aFTg6xflGQ=; _locale=uk; PHPSESSID=m6crecqnejjebhnsflt0tb6u2i;",
+        "cookie": "_ga=GA1.1.974410053.1677012331; _locale=pl; __cf_bm=XAHAiQdrgROSu7438PzrTFW8OVsf8zxqgYW52DmP7_Y-1677096850-0-AV1IKGLbvb4kzd6c/ytE6wb7oKuRIAUdyZW9ABF7XE5XNanUxsa8gUSlA9UzrtszyqzSPvgXzdTrS1djTAN9RmiHEssdQSya3nteqePgk65KZRe4cv6U8trbuVpHOUBP8xeuJsJFNKuBigJhnmxehHg=; PHPSESSID=dvr4v55q0ifndto4on72erinet; _ga_WV47C9QQSP=GS1.1.1677096844.4.1.1677096923.0.0.0",
         "Referer": "https://pesnihi.com/sing/list",
         "Referrer-Policy": "strict-origin-when-cross-origin"
     }
