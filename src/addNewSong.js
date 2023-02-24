@@ -62,8 +62,9 @@ export const addNewSong = async ({ title, text, singers, language }) => {
 
     console.log(
         result.ok
-            ? `+ Added new song with id ${songId}`
-            : `- Failed to add new song with id ${songId}`
+            ? `+ Added new song with id ${songId} ${title}`
+            : `- Failed to add new song with id ${songId} ${title}. Reason: ${await result.json()
+                  .message}`
     );
 
     return { added: result.ok };
