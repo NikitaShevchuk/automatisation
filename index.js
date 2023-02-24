@@ -1,6 +1,6 @@
 import fs from "fs";
 import { addNewSong } from "./src/addNewSong.js";
-import { scrapTheLyrics } from "./src/scrapTheLyrics.js";
+import { lyricsScrapper } from "./src/lyricsScrapper.js";
 
 const start = async () => {
     try {
@@ -9,10 +9,10 @@ const start = async () => {
 
             data.split("\r").forEach((line, index) => {
                 setTimeout(async () => {
-                    const songInfo = await scrapTheLyrics(line);
+                    const songInfo = await lyricsScrapper(line);
                     if (!songInfo) return;
 
-                    await addNewSong(songInfo);
+                    // await addNewSong(songInfo);
                 }, 200 * index);
             });
         });
