@@ -14,15 +14,16 @@ const start = async () => {
 
             await Promise.all(
                 lyricsLinks.diff.map(async (diff, index) => {
-                    setTimeout(async () => {
-                        const songInfo = await lyricsScrapper(diff.link);
-                        if (!songInfo) return;
+                    await new Promise((resolve) => {
+                        setTimeout(resolve, 200 * index);
+                    });
+                    const songInfo = await lyricsScrapper(diff.link);
+                    if (!songInfo) return;
 
-                        const { added } = await addNewSong(songInfo);
-                        if (added) addedCount++;
+                    const { added } = await addNewSong(songInfo);
+                    if (added) addedCount++;
 
-                        return added;
-                    }, 200 * index);
+                    return added;
                 })
             );
 
