@@ -27,7 +27,7 @@ const start = async () => {
                 })
             );
 
-            console.log(`Added ${addedCount}/${lyricsLinks.length}`);
+            console.log(`Added ${addedCount}/${lyricsLinks.diff.length}`);
         });
     } catch (error) {
         console.log(error);
