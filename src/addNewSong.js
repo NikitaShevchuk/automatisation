@@ -16,7 +16,6 @@ const getSongId = async () => {
             songId = scriptBody.split("window.currentId = '")[1]?.replace("';\n", "");
         });
 
-    console.log(songId);
     return songId;
 };
 
@@ -60,9 +59,12 @@ export const addNewSong = async ({ title, text, singers, language }) => {
     });
 
     const result = await patchTheSong(songId, responseInstance);
-    console.log(result);
 
     console.log(
-        result.ok ? `Added new song with id ${songId}` : `Failed to add new song with id ${songId}`
+        result.ok
+            ? `+ Added new song with id ${songId}`
+            : `- Failed to add new song with id ${songId}`
     );
+
+    return { added: result.ok };
 };

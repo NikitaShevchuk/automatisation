@@ -1,20 +1,28 @@
 import fs from "fs";
 import { addNewSong } from "./src/addNewSong.js";
+import { getLyricsLinks } from "./src/getLyricsLinks.js";
 import { lyricsScrapper } from "./src/lyricsScrapper.js";
 
 const start = async () => {
     try {
-        fs.readFile("lyrics.txt", "utf8", (err, data) => {
+        fs.readFile("lyrics.txt", "utf8", async (err, data) => {
             if (err || !data) throw err;
 
-            data.split("\r").forEach((line, index) => {
+            const lyricsLinks = await getLyricsLinks(data);
+
+            let addedCount = 0;
+
+            lyricsLinks.diff.forEach((diff, index) => {
                 setTimeout(async () => {
-                    const songInfo = await lyricsScrapper(line);
+                    const songInfo = await lyricsScrapper(diff.link);
                     if (!songInfo) return;
 
-                    // await addNewSong(songInfo);
+                    const { added } = await addNewSong(songInfo);
+                    if (added) addedCount++;
                 }, 200 * index);
             });
+
+            console.log(`Added ${addedCount}/${lyricsLinks.length}`);
         });
     } catch (error) {
         console.log(error);
