@@ -47,6 +47,7 @@ export const addNewSong = async ({ title, text, singers, language }) => {
     let extendedTitle = null;
     if (title.includes("(")) {
         extendedTitle = title.split("(")[1].split(")")[0];
+        title = title.split("(")[0];
     }
 
     const responseInstance = await getResponseInstance({

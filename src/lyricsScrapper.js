@@ -31,7 +31,7 @@ export const lyricsScrapper = async (geniusLink) => {
     const $ = load(pageHtml);
 
     const allSingers = await getAllSingers($);
-    const singersArray = [$(".PcIZE").text(), ...allSingers];
+    const singersArray = [$(".fPVhsa").text(), ...allSingers];
 
     console.log(singersArray);
 
