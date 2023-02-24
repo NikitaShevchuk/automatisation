@@ -12,15 +12,19 @@ const start = async () => {
 
             let addedCount = 0;
 
-            lyricsLinks.diff.forEach((diff, index) => {
-                setTimeout(async () => {
-                    const songInfo = await lyricsScrapper(diff.link);
-                    if (!songInfo) return;
+            await Promise.all(
+                lyricsLinks.diff.map(async (diff, index) => {
+                    setTimeout(async () => {
+                        const songInfo = await lyricsScrapper(diff.link);
+                        if (!songInfo) return;
 
-                    const { added } = await addNewSong(songInfo);
-                    if (added) addedCount++;
-                }, 200 * index);
-            });
+                        const { added } = await addNewSong(songInfo);
+                        if (added) addedCount++;
+
+                        return added;
+                    }, 200 * index);
+                })
+            );
 
             console.log(`Added ${addedCount}/${lyricsLinks.length}`);
         });
