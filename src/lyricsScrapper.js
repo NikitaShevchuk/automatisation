@@ -33,10 +33,6 @@ export const lyricsScrapper = async (geniusLink) => {
     const allSingers = await getAllSingers($);
     const singersArray = [$(".fPVhsa").text(), ...allSingers];
 
-    singersArray.forEach((singer) => {
-        if (!singer) console.log("no singer found");
-    });
-
     let language;
     const singers = await Promise.all(
         singersArray.map(async (singer) => {
@@ -58,6 +54,12 @@ export const lyricsScrapper = async (geniusLink) => {
     );
 
     const title = $(".kwCpxe").text();
+
+    singersArray.forEach((singer) => {
+        if (!singer) console.log(`no singer found ${title}`);
+    });
+
+    if (!text) console.log(`no lyrics found ${title}`);
 
     return {
         text,
