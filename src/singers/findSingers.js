@@ -6,7 +6,7 @@ export const findSingers = async (singersArray) => {
     await Promise.all(
         singersArray.map(async (singer) => {
             const singerFromApi = await fetch(
-                `https://pesnihi.com/api/singers.json?name=${singer}`,
+                `https://pesnihi.com/api/get_exact_singers?name=${singer}`,
                 {
                     headers: apiHeaders,
                 }

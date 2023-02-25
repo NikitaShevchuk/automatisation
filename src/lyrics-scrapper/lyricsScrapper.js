@@ -1,7 +1,7 @@
 import axios from "axios";
 import { load } from "cheerio";
 import { getLyrics } from "genius-scraper";
-import { detectLanguage } from "../laguage-detection/detect-language.js";
+import { detectLanguage } from "../language-detection/detect-language.js";
 import { findSingers } from "../singers/findSingers.js";
 import { getAllSingers } from "../singers/getAllSingers.js";
 
