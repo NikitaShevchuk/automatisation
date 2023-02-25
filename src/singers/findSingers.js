@@ -17,6 +17,9 @@ export const findSingers = async (singersArray) => {
 
             if (!response[0]) {
                 const newSingerResponse = await addNewSinger(singer, language);
+                console.log(
+                    `Singer "${singer}" not found. Added new one with data: ${newSingerResponse}`
+                );
                 return `/api/singers/${newSingerResponse.id}`;
             }
 

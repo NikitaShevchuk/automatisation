@@ -17,13 +17,11 @@ export const lyricsScrapper = async (geniusLink) => {
 
     const language = await detectLanguage(text);
 
+    console.log(`detected language: ${language}`);
+
     const singers = await findSingers(singersArray);
 
     const title = $(".kwCpxe").text();
-
-    singersArray.forEach((singer) => {
-        if (!singer) console.log(`no singer found ${title}`);
-    });
 
     if (!text) console.log(`no lyrics found ${title}`);
 
