@@ -24,8 +24,10 @@ const start = async () => {
 
                     if (!songInfo) return true;
 
-                    const { added } = await addNewSong(songInfo);
-                    if (added) addedCount++;
+                    // const { added } = await addNewSong(songInfo);
+                    // if (added) addedCount++;
+                    // return added;
+
                     return true;
                 })
             );

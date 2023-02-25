@@ -53,8 +53,6 @@ export const lyricsScrapper = async (geniusLink) => {
         return undefined;
     }
 
-    console.log(text);
-
     text = text
         .replace(/[^A-Za-z0-9\s![?:,](")'\r\n|\r|\n]/g, "")
         .replace("X2", "")
@@ -62,6 +60,7 @@ export const lyricsScrapper = async (geniusLink) => {
         .replace("[?]", "")
         .replace("\n\n\n", "\n\n")
         .replace("&nbsp", " ");
+    console.log(text);
     return {
         text,
         title,
