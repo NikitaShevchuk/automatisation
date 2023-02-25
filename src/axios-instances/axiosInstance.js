@@ -1,8 +1,8 @@
 import axios from "axios";
-import { cookie } from "../cookie.js";
+import { cookie } from "../../cookie.js";
 
-export const axiosAdminInstance = axios.create({
-    baseURL: "https://pesnihi.com/api/",
+export const axiosInstance = axios.create({
+    baseURL: "https://pesnihi.com/",
     headers: {
         accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
         "accept-language": "en,uk;q=0.9",
@@ -15,8 +15,7 @@ export const axiosAdminInstance = axios.create({
         "sec-fetch-user": "?1",
         "upgrade-insecure-requests": "1",
         cookie: cookie,
-        Referer: "https://pesnihi.com/api/sing/create",
+        Referer: "https://pesnihi.com/sing/list",
         "Referrer-Policy": "strict-origin-when-cross-origin",
-        "if-none-match": 'W/"e16bd5192b58098b7265b3f2779ea3aa"',
     },
 });

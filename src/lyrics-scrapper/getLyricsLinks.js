@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiHeaders } from "./headers.js";
+import { apiHeaders } from "../headers.js";
 
 export const getLyricsLinks = async (pageId) => {
     return await axios

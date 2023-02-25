@@ -1,7 +1,7 @@
 import { load } from "cheerio";
-import { axiosAdminInstance } from "./axiosAdminInstance.js";
-import { axiosInstance } from "./axiosInstance.js";
-import { patchTheSong } from "./patchTheSong.js";
+import { axiosAdminInstance } from "./axios-instances/axiosAdminInstance.js";
+import { axiosInstance } from "./axios-instances/axiosInstance.js";
+import { patchRequest } from "./patchTheSong.js";
 
 const getSongId = async () => {
     let songId;
@@ -58,7 +58,7 @@ export const addNewSong = async ({ title, text, singers, language }) => {
         singers,
     });
 
-    const result = await patchTheSong(songId, responseInstance);
+    const result = await patchRequest(songId, responseInstance);
 
     console.log(
         result.ok

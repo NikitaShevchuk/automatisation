@@ -1,7 +1,7 @@
 import fs from "fs";
 import { addNewSong } from "./src/addNewSong.js";
-import { getLyricsLinks } from "./src/getLyricsLinks.js";
-import { lyricsScrapper } from "./src/lyricsScrapper.js";
+import { getLyricsLinks } from "./src/lyrics-scrapper/getLyricsLinks.js";
+import { lyricsScrapper } from "./src/lyrics-scrapper/lyricsScrapper.js";
 
 const start = async () => {
     try {
@@ -22,7 +22,6 @@ const start = async () => {
 
                     const { added } = await addNewSong(songInfo);
                     if (added) addedCount++;
-
                     return added;
                 })
             );

@@ -2,26 +2,10 @@ import axios from "axios";
 import { load } from "cheerio";
 import { getLyrics } from "genius-scraper";
 import fetch from "node-fetch";
-import { apiHeaders } from "./headers.js";
-
-const getAllSingers = async ($) => {
-    const singers = [];
-
-    let featured = $(".dWcYSx")?.find(".fognin");
-    let wrapper;
-    if (featured) {
-        featured.each((_, element) => {
-            if ($(element)?.find(".kOJa-dB").text().includes("Featuring")) {
-                wrapper = $(element);
-            }
-        });
-    }
-    if (wrapper) {
-        const singer = wrapper.find(".fUgcxf").text();
-        if (singer) singers.push(singer);
-    }
-    return singers;
-};
+import { apiHeaders } from "../headers.js";
+import { addNewSinger } from "./addNewSinger.js";
+import { detectLanguage } from "./detect-language.js";
+import { getAllSingers } from "./getAllSingers.js";
 
 export const lyricsScrapper = async (geniusLink) => {
     const text = await getLyrics(geniusLink);
@@ -33,7 +17,8 @@ export const lyricsScrapper = async (geniusLink) => {
     const allSingers = await getAllSingers($);
     const singersArray = [$(".fPVhsa").text(), ...allSingers];
 
-    let language;
+    const language = await detectLanguage(text);
+
     const singers = await Promise.all(
         singersArray.map(async (singer) => {
             const singerFromApi = await fetch(
@@ -44,10 +29,11 @@ export const lyricsScrapper = async (geniusLink) => {
             );
 
             const response = await singerFromApi.json();
-
-            if (!singerFromApi.ok || singerFromApi.status !== 200 || !response[0]) return;
-
-            if (response[0]?.language) language = response[0]?.language;
+            if (!singerFromApi.ok) return;
+            if (!response[0]) {
+                const newSingerResponse = await addNewSinger(singer, language);
+                return `/api/singers/${newSingerResponse.id}`;
+            }
 
             return `/api/singers/${response[0]?.id}`;
         })
