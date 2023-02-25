@@ -1,9 +1,9 @@
 import axios from "axios";
 import { load } from "cheerio";
 import { getLyrics } from "genius-scraper";
-import { detectLanguage } from "./detect-language.js";
-import { getAllSingers } from "./getAllSingers.js";
-import { findSingers } from "./findSingers.js";
+import { detectLanguage } from "../laguage-detection/detect-language.js";
+import { findSingers } from "../singers/findSingers.js";
+import { getAllSingers } from "../singers/getAllSingers.js";
 
 export const lyricsScrapper = async (geniusLink) => {
     const text = await getLyrics(geniusLink);
