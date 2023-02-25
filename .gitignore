@@ -11,6 +11,8 @@ package-lock.json
 # Optional npm cache directory
 .npm
 
+lyrics.txt
+
 # Dependency directories
 /node_modules
 /jspm_packages
