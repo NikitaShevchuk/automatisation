@@ -21,7 +21,7 @@
     "axios": "^1.3.3",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.3",
-    "genius-scraper": "^1.0.3",
-    "node-fetch": "^3.3.0"
+    "node-fetch": "^3.3.0",
+    "phin": "^3.7.0"
   }
 }

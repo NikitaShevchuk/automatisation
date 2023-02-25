@@ -2,24 +2,33 @@ import fetch from "node-fetch";
 import { apiHeaders } from "../headers.js";
 import { addNewSinger } from "./addNewSinger.js";
 
-export const findSingers = async (singersArray) => {
-    await Promise.all(
-        singersArray.map(async (singer) => {
+export const findSingers = async (singersArray, language) => {
+    return await Promise.all(
+        singersArray.map(async (singer, index) => {
+            await new Promise((resolve) => {
+                setTimeout(resolve, 200 * index);
+            });
+
             const singerFromApi = await fetch(
-                `https://pesnihi.com/api/get_exact_singers?name=${singer}`,
+                `https://pesnihi.com/get_exact_singers?search=` + encodeURIComponent(singer),
                 {
-                    headers: apiHeaders,
+                    headers: { ...apiHeaders, "content-type": "application/x-www-form-urlencoded" },
+                    body: null,
+                    method: "POST",
                 }
             );
 
             const response = await singerFromApi.json();
-            if (!singerFromApi.ok) return;
+
+            if (!singerFromApi.ok) {
+                throw new Error(`Singer "${singer}" not found, error response`);
+            }
 
             if (!response[0]) {
+                console.log(`Singer "${singer}" not found`);
+
                 const newSingerResponse = await addNewSinger(singer, language);
-                console.log(
-                    `Singer "${singer}" not found. Added new one with data: ${newSingerResponse}`
-                );
+                console.log(`Added new one with data: ${JSON.stringify(newSingerResponse)}`);
                 return `/api/singers/${newSingerResponse.id}`;
             }
 

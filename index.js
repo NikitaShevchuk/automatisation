@@ -1,3 +1,4 @@
+import "dotenv/config";
 import fs from "fs";
 import { addNewSong } from "./src/addNewSong.js";
 import { getLyricsLinks } from "./src/lyrics-scrapper/getLyricsLinks.js";
@@ -14,15 +15,18 @@ const start = async () => {
 
             await Promise.all(
                 lyricsLinks.diff.map(async (diff, index) => {
+                    if (index > 4) return true;
+
                     await new Promise((resolve) => {
-                        setTimeout(resolve, 200 * index);
+                        setTimeout(resolve, 500 * index);
                     });
                     const songInfo = await lyricsScrapper(diff.link);
-                    if (!songInfo) return;
+
+                    if (!songInfo) return true;
 
                     const { added } = await addNewSong(songInfo);
                     if (added) addedCount++;
-                    return added;
+                    return true;
                 })
             );
 
