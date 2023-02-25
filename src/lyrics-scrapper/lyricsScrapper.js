@@ -28,7 +28,7 @@ export const lyricsScrapper = async (geniusLink) => {
     if (!text) console.log(`no lyrics found ${title}`);
 
     return {
-        text,
+        text: text.replace("X2", "").replace("x2", "").replace("\n\n", "\n"),
         title,
         singers,
         language,
