@@ -1,11 +1,9 @@
 import axios from "axios";
 import { load } from "cheerio";
 import { getLyrics } from "genius-scraper";
-import fetch from "node-fetch";
-import { apiHeaders } from "../headers.js";
-import { addNewSinger } from "./addNewSinger.js";
 import { detectLanguage } from "./detect-language.js";
 import { getAllSingers } from "./getAllSingers.js";
+import { findSingers } from "./findSingers.js";
 
 export const lyricsScrapper = async (geniusLink) => {
     const text = await getLyrics(geniusLink);
@@ -19,25 +17,7 @@ export const lyricsScrapper = async (geniusLink) => {
 
     const language = await detectLanguage(text);
 
-    const singers = await Promise.all(
-        singersArray.map(async (singer) => {
-            const singerFromApi = await fetch(
-                `https://pesnihi.com/api/singers.json?name=${singer}`,
-                {
-                    headers: apiHeaders,
-                }
-            );
-
-            const response = await singerFromApi.json();
-            if (!singerFromApi.ok) return;
-            if (!response[0]) {
-                const newSingerResponse = await addNewSinger(singer, language);
-                return `/api/singers/${newSingerResponse.id}`;
-            }
-
-            return `/api/singers/${response[0]?.id}`;
-        })
-    );
+    const singers = await findSingers(singersArray);
 
     const title = $(".kwCpxe").text();
 
