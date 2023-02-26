@@ -15,7 +15,14 @@ export const getSongInfoFromApi = async (songId) => {
         if (songInfoFromApi.artist_names.includes("&")) {
             const splitedNames = songInfoFromApi.artist_names.split("&");
             splitedNames.forEach((name) => {
-                allSingers.push(name.trim());
+                let newSinger = name.trim();
+                if (newSinger.includes(",")) {
+                    newSinger.split(",").forEach((singer) => {
+                        allSingers.push(singer.trim());
+                    });
+                    return;
+                }
+                allSingers.push(newSinger);
             });
         } else {
             allSingers.push(songInfoFromApi.artist_names);
@@ -24,7 +31,14 @@ export const getSongInfoFromApi = async (songId) => {
         if (songInfoFromApi.artist_names.split("(Ft.")[0].includes("&")) {
             const splitedNames = songInfoFromApi.artist_names.split("(Ft.")[0].split("&");
             splitedNames.forEach((name) => {
-                allSingers.push(name.trim());
+                let newSinger = name.trim();
+                if (newSinger.includes(",")) {
+                    newSinger.split(",").forEach((singer) => {
+                        allSingers.push(singer.trim());
+                    });
+                    return;
+                }
+                allSingers.push(newSinger);
             });
         } else {
             allSingers.push(songInfoFromApi.artist_names.split("(Ft.")[0].trim());
