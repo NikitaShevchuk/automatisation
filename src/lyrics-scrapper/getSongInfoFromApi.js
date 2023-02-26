@@ -48,6 +48,16 @@ export const getSongInfoFromApi = async (songId) => {
         });
     }
 
+    const fixedArtist = allSingers[0]
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^A-Za-z0-9-]/g, "");
+    const fixedTitle = songInfoFromApi.title
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^A-Za-z0-9-]/g, "");
+    const slug = `${fixedArtist.split("")[0]}/${fixedArtist}/${fixedTitle}.html`;
+
     return {
         title: songInfoFromApi.title,
         allSingers: allSingers.map((singer) => {
@@ -57,5 +67,6 @@ export const getSongInfoFromApi = async (songId) => {
             }
             return singer;
         }),
+        slug,
     };
 };

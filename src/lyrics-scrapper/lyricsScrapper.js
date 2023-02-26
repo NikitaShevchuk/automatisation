@@ -25,7 +25,7 @@ export const lyricsScrapper = async (geniusLink) => {
             }
         });
 
-    const { allSingers, title } = await getSongInfoFromApi(songId);
+    const { allSingers, title, slug } = await getSongInfoFromApi(songId);
 
     if (checkForException(title)) {
         console.log("Title is not valid:" + ` ${title}`);
@@ -61,7 +61,7 @@ export const lyricsScrapper = async (geniusLink) => {
         return undefined;
     }
 
-    const singers = await findSingers(allSingers, language);
+    const { singers, singersOrder } = await findSingers(allSingers, language);
 
     if (!text) {
         console.log(`no lyrics found ${title}'`);
@@ -85,5 +85,7 @@ export const lyricsScrapper = async (geniusLink) => {
         title,
         singers,
         language,
+        singersOrder,
+        slug,
     };
 };

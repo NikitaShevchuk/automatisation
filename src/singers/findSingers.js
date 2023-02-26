@@ -3,7 +3,8 @@ import { apiHeaders } from "../headers.js";
 import { addNewSinger } from "./addNewSinger.js";
 
 export const findSingers = async (singersArray, language) => {
-    return await Promise.all(
+    const singersOrder = [];
+    const singers = await Promise.all(
         singersArray.map(async (singer, index) => {
             await new Promise((resolve) => {
                 setTimeout(resolve, 200 * index);
@@ -31,8 +32,13 @@ export const findSingers = async (singersArray, language) => {
                 console.log(`Added new one with data: ${JSON.stringify(newSingerResponse)}`);
                 return `/api/singers/${newSingerResponse.id}`;
             }
+            singersOrder.push(response[0]?.id);
 
             return `/api/singers/${response[0]?.id}`;
         })
     );
+    return {
+        singersOrder,
+        singers,
+    };
 };

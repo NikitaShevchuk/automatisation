@@ -19,7 +19,16 @@ const getSongId = async () => {
     return songId;
 };
 
-const getResponseInstance = async ({ songId, title, text, language, singers, extendedTitle }) => {
+const getResponseInstance = async ({
+    songId,
+    title,
+    text,
+    language,
+    singers,
+    extendedTitle,
+    singersOrder,
+    slug,
+}) => {
     const response = await axiosAdminInstance
         .get(`sings/${songId}.json`)
         .then((response) => response.data);
@@ -32,11 +41,14 @@ const getResponseInstance = async ({ songId, title, text, language, singers, ext
     response.language = language;
     response.isPublish = true;
     response.extendedTitle = extendedTitle;
+    response.singersOrder = singersOrder;
+    response.slug = slug;
+    response.source = 'a:2:{s:3:"url";s:0:"";s:5:"title";s:0:"";}';
 
     return response;
 };
 
-export const addNewSong = async ({ title, text, singers, language }) => {
+export const addNewSong = async ({ title, text, singers, language, singersOrder, slug }) => {
     const songId = await getSongId();
     if (!songId || songId === "undefined") {
         console.log("id is not found");
@@ -56,6 +68,8 @@ export const addNewSong = async ({ title, text, singers, language }) => {
         text,
         language,
         singers,
+        singersOrder,
+        slug,
     });
 
     const result = await patchRequest(songId, responseInstance);
