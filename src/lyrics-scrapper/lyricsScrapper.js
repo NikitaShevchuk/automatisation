@@ -39,6 +39,11 @@ export const lyricsScrapper = async (geniusLink) => {
 
     const language = await detectLanguage(text);
 
+    if (language === "Русский") {
+        console.log(`Detected song with РУСНЯВА МОВА ${title}`);
+        return undefined;
+    }
+
     let includesGenius = false;
 
     allSingers.forEach((singer) => {
