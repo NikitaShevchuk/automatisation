@@ -10,8 +10,11 @@ export const addNewSinger = async (name, language) => {
     const creators = await creatorsFromApi.json();
     const creator = creators.find((user) => user.id === 25);
 
+    const slug = name.toLowerCase().replace(/\s+/g, "-");
+
     const body = {
         name,
+        slug,
         language,
         description: "",
         directData: "",
