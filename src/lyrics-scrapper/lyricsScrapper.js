@@ -39,12 +39,22 @@ export const lyricsScrapper = async (geniusLink) => {
 
     const language = await detectLanguage(text);
 
+    let includesGenius = false;
+
     allSingers.forEach((singer) => {
+        if (singer.includes("Genius")) {
+            includesGenius = true;
+        }
         if (!singer) {
             console.log(`No name found. Title: ${title}. Link: ${geniusLink}`);
             throw new Error(`No name found`);
         }
     });
+
+    if (includesGenius) {
+        console.log("Genius in title was found:" + ` ${title}`);
+        return undefined;
+    }
 
     const singers = await findSingers(allSingers, language);
 
@@ -53,14 +63,18 @@ export const lyricsScrapper = async (geniusLink) => {
         return undefined;
     }
 
+    if (text.match(/\[\?\]/g)) {
+        console.log(`Invalid text (includes "[?]") ${title}`);
+        return undefined;
+    }
+
     text = text
         .replace(/[^A-Za-z0-9\s![?:,](")'\r\n|\r|\n]/g, "")
-        .replace("X2", "")
-        .replace("x2", "")
-        .replace("[?]", "")
-        .replace("\n\n\n", "\n\n")
-        .replace("&nbsp", " ");
-    console.log(text);
+        .replace(/x\d+/g, "")
+        .replace(/X\d+/g, "")
+        .replace(/\\n\\n\\n/g, "\n\n")
+        .replace(/&nbsp/g, " ");
+
     return {
         text,
         title,

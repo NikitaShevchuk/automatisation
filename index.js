@@ -15,7 +15,7 @@ const start = async () => {
 
             await Promise.all(
                 lyricsLinks.diff.map(async (diff, index) => {
-                    if (index > 4) return true;
+                    // if (index > 10) return true;
 
                     await new Promise((resolve) => {
                         setTimeout(resolve, 500 * index);
@@ -24,11 +24,11 @@ const start = async () => {
 
                     if (!songInfo) return true;
 
-                    // const { added } = await addNewSong(songInfo);
-                    // if (added) addedCount++;
-                    // return added;
+                    const { added } = await addNewSong(songInfo);
+                    if (added) addedCount++;
+                    return added;
 
-                    return true;
+                    // return true;
                 })
             );
 

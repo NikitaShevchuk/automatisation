@@ -1,4 +1,30 @@
-const exceptions = ["Remix", "remix", "*"];
+const exceptions = [
+    "Remix",
+    "remix",
+    "*",
+    "Skit",
+    "skit",
+    "Cover",
+    "cover",
+    "Demo",
+    "demo",
+    "Snippet",
+    "snippet",
+    "RMX",
+    "rmx",
+    "Tracklist",
+    "tracklist",
+    "Live On",
+    "live on",
+    "Live At",
+    "live at",
+    "- live",
+    "- Live",
+    "Live Version",
+    "live version",
+    "Acoustic",
+    "acoustic",
+];
 
 export const checkForException = (title) => {
     let hasException = false;

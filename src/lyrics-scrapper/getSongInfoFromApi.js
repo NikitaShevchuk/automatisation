@@ -12,9 +12,23 @@ export const getSongInfoFromApi = async (songId) => {
     let allSingers = [];
 
     if (!songInfoFromApi.artist_names.includes("(Ft.")) {
-        allSingers.push(songInfoFromApi.artist_names);
+        if (songInfoFromApi.artist_names.includes("&")) {
+            const splitedNames = songInfoFromApi.artist_names.split("&");
+            splitedNames.forEach((name) => {
+                allSingers.push(name.trim());
+            });
+        } else {
+            allSingers.push(songInfoFromApi.artist_names);
+        }
     } else {
-        allSingers.push(songInfoFromApi.artist_names.split("(Ft.")[0].trim());
+        if (songInfoFromApi.artist_names.split("(Ft.")[0].includes("&")) {
+            const splitedNames = songInfoFromApi.artist_names.split("(Ft.")[0].split("&");
+            splitedNames.forEach((name) => {
+                allSingers.push(name.trim());
+            });
+        } else {
+            allSingers.push(songInfoFromApi.artist_names.split("(Ft.")[0].trim());
+        }
         songInfoFromApi.featured_artists.forEach((artist) => {
             allSingers.push(artist.name);
         });
