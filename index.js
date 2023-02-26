@@ -24,11 +24,13 @@ const start = async () => {
 
                     if (!songInfo) return true;
 
-                    const { added } = await addNewSong(songInfo);
-                    if (added) addedCount++;
-                    return added;
+                    console.log(songInfo.text);
 
-                    // return true;
+                    // const { added } = await addNewSong(songInfo);
+                    // if (added) addedCount++;
+                    // return added;
+
+                    return true;
                 })
             );
 
