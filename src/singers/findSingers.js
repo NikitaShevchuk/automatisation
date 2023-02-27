@@ -29,7 +29,6 @@ export const findSingers = async (singersArray, language) => {
                 console.log(`Singer "${singer}" not found`);
 
                 const newSingerResponse = await addNewSinger(singer, language);
-                console.log(`Added new one with data: ${JSON.stringify(newSingerResponse)}`);
                 return `/api/singers/${newSingerResponse.id}`;
             }
             singersOrder.push(response[0]?.id);
