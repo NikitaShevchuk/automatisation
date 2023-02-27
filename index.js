@@ -13,24 +13,28 @@ const start = async () => {
 
             let addedCount = 0;
 
-            await Promise.all(
-                lyricsLinks.diff.map(async (diff, index) => {
-                    // if (index > 10) return true;
+            try {
+                await Promise.all(
+                    lyricsLinks.diff.map(async (diff, index) => {
+                        // if (index > 10) return true;
 
-                    await new Promise((resolve) => {
-                        setTimeout(resolve, 500 * index);
-                    });
-                    const songInfo = await lyricsScrapper(diff.link);
+                        await new Promise((resolve) => {
+                            setTimeout(resolve, 500 * index);
+                        });
+                        const songInfo = await lyricsScrapper(diff.link);
 
-                    if (!songInfo) return true;
+                        if (!songInfo) return true;
 
-                    // const { added } = await addNewSong(songInfo);
-                    // if (added) addedCount++;
-                    // return added;
+                        // const { added } = await addNewSong(songInfo);
+                        // if (added) addedCount++;
+                        // return added;
 
-                    return true;
-                })
-            );
+                        return true;
+                    })
+                );
+            } catch (error) {
+                console.log(error);
+            }
 
             console.log(`Added ${addedCount}/${lyricsLinks.diff.length}`);
         });
