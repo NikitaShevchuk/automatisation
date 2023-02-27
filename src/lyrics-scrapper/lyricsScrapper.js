@@ -3,6 +3,7 @@ import { load } from "cheerio";
 import { detectLanguage } from "../language-detection/detect-language.js";
 import { findSingers } from "../singers/findSingers.js";
 import { checkForException } from "./checkForException.js";
+import { fixText } from "./fixText.js";
 import { getLyrics } from "./getLyrics.js";
 import { getSongInfoFromApi } from "./getSongInfoFromApi.js";
 
@@ -31,21 +32,16 @@ export const lyricsScrapper = async (geniusLink) => {
         console.log("Title is not valid:" + ` ${title}`);
         return undefined;
     }
-
     if (allSingers.length > 6) {
         console.log("Too many singers:" + ` ${title}`);
         return undefined;
     }
-
     const language = await detectLanguage(text);
-
     if (language === "Русский") {
         console.log(`Detected song with РУСНЯВА МОВА ${title}`);
         return undefined;
     }
-
     let includesGenius = false;
-
     allSingers.forEach((singer) => {
         if (singer.includes("Genius")) {
             includesGenius = true;
@@ -55,31 +51,22 @@ export const lyricsScrapper = async (geniusLink) => {
             throw new Error(`No name found`);
         }
     });
-
     if (includesGenius) {
         console.log("Genius in title was found:" + ` ${title}`);
         return undefined;
     }
-
     const { singers, singersOrder } = await findSingers(allSingers, language);
 
     if (!text) {
         console.log(`no lyrics found ${title}'`);
         return undefined;
     }
-
     if (text.match(/\[\?\]/g)) {
         console.log(`Invalid text (includes "[?]") ${title}`);
         return undefined;
     }
 
-    text = text
-        .replace(/&nbsp/g, " ")
-        .replace(/[^A-Za-z0-9\s![?:,](")'\r\n|\r|\n]/g, "")
-        .replace(/x\d+/g, "")
-        .replace(/X\d+/g, "")
-        .replace(/\[[^\]]*\]/g, "")
-        .replace(/\\n\\n\\n/g, "\n\n");
+    text = fixText(text);
 
     return {
         text,
