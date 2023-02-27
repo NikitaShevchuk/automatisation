@@ -107,9 +107,9 @@ export const fixText = (text) => {
         // with first upper case
         const firstUpperWithBrackets = exception.split("");
         firstUpperWithBrackets[0] = firstUpperWithBrackets[0].toUpperCase();
-        fixedText = fixedText.replace(`(${exceptionWithBrackets.join("")})`, "");
-        fixedText = fixedText.replace(`${exceptionWithBrackets.join("")}:`, "");
-        fixedText = fixedText.replace(`${exceptionWithBrackets.join("")} :`, "");
+        fixedText = fixedText.replace(`(${firstUpperWithBrackets.join("")})`, "");
+        fixedText = fixedText.replace(`${firstUpperWithBrackets.join("")}:`, "");
+        fixedText = fixedText.replace(`${firstUpperWithBrackets.join("")} :`, "");
 
         const firstUpper = exception.split("");
         firstUpper[0] = firstUpper[0].toUpperCase();
