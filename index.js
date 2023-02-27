@@ -24,15 +24,19 @@ const start = async () => {
 
                     if (!songInfo) return true;
 
-                    try {
-                        const { added } = await addNewSong(songInfo);
+                    console.log(songInfo.text);
 
-                        if (added) addedCount++;
-                        return added;
-                    } catch (error) {
-                        console.log(error);
-                        return true;
-                    }
+                    return true;
+
+                    // try {
+                    //     const { added } = await addNewSong(songInfo);
+
+                    //     if (added) addedCount++;
+                    //     return added;
+                    // } catch (error) {
+                    //     console.log(error);
+                    //     return true;
+                    // }
                 })
             );
 
