@@ -82,6 +82,8 @@ const exceptions = [
     "REFRAIN",
     "Refrain",
     "refrain",
+    "",
+    "\x91",
 ];
 
 export const fixText = (text) => {
@@ -102,6 +104,8 @@ export const fixText = (text) => {
         .replace(/&nbsp/g, " ")
         .replace(/[^A-Za-z0-9\s![?:,](")'\r\n|\r|\n]/g, "")
         .replace(/-{2,}/g, "")
+        .replace(/\*/g, "")
+        .replace(/\./g, "")
         .replace(/\(x\d+\)/g, "")
         .replace(/\(X\d+\)/g, "")
         .replace(/\(\d+x\)/g, "")
