@@ -107,5 +107,5 @@ export const fixText = (text) => {
         .replace(/\d+X/g, "")
         .replace(/\[[^\]]*\]/g, "")
         .replace(/\{[^\}]*\}/g, "")
-        .replace(/\\n\\n\\n/g, "\n\n");
+        .replace(/(\n{2,})/g, "\n\n");
 };
