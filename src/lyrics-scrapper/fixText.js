@@ -93,6 +93,24 @@ export const fixText = (text) => {
         fixedText = fixedText.replace(`(${exception})`, "");
         fixedText = fixedText.replace(`${exception}:`, "");
         fixedText = fixedText.replace(`${exception} :`, "");
+
+        // lower case
+        fixedText = fixedText.replace(`(${exception.toLowerCase()})`, "");
+        fixedText = fixedText.replace(`${exception.toLowerCase()}:`, "");
+        fixedText = fixedText.replace(`${exception.toLowerCase()} :`, "");
+
+        // upper case
+        fixedText = fixedText.replace(`(${exception.toUpperCase()})`, "");
+        fixedText = fixedText.replace(`${exception.toUpperCase()}:`, "");
+        fixedText = fixedText.replace(`${exception.toUpperCase()} :`, "");
+
+        // with first upper case
+        const firstUpperWithBrackets = exception.split("");
+        firstUpperWithBrackets[0] = firstUpperWithBrackets[0].toUpperCase();
+        fixedText = fixedText.replace(`(${exceptionWithBrackets.join("")})`, "");
+        fixedText = fixedText.replace(`${exceptionWithBrackets.join("")}:`, "");
+        fixedText = fixedText.replace(`${exceptionWithBrackets.join("")} :`, "");
+
         const firstUpper = exception.split("");
         firstUpper[0] = firstUpper[0].toUpperCase();
         fixedText = fixedText.replace(firstUpper.join(""), "");
