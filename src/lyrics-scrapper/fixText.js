@@ -134,5 +134,6 @@ export const fixText = (text) => {
         .replace(/X\d+/g, "")
         .replace(/\d+x/g, "")
         .replace(/\d+X/g, "")
+        .replace(/^\s*$\n/gm, "\n")
         .replace(/(\n{2,})/g, "\n\n");
 };
