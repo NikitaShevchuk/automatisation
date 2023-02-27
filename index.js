@@ -24,8 +24,6 @@ const start = async () => {
 
                     if (!songInfo) return true;
 
-                    console.log(songInfo.text);
-
                     // const { added } = await addNewSong(songInfo);
                     // if (added) addedCount++;
                     // return added;

@@ -106,6 +106,8 @@ export const fixText = (text) => {
         .replace(/-{2,}/g, "")
         .replace(/\*/g, "")
         .replace(/\./g, "")
+        .replace(/\[[^\]]*\]/g, "")
+        .replace(/\{[^\}]*\}/g, "")
         .replace(/\(x\d+\)/g, "")
         .replace(/\(X\d+\)/g, "")
         .replace(/\(\d+x\)/g, "")
@@ -114,7 +116,5 @@ export const fixText = (text) => {
         .replace(/X\d+/g, "")
         .replace(/\d+x/g, "")
         .replace(/\d+X/g, "")
-        .replace(/\[[^\]]*\]/g, "")
-        .replace(/\{[^\}]*\}/g, "")
         .replace(/(\n{2,})/g, "\n\n");
 };
