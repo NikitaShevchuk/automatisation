@@ -67,6 +67,6 @@ export const getLanguageByCode = (code) => {
         case "ka":
             return "Грузинский";
         default:
-            return undefined;
+            return "Английский";
     }
 };

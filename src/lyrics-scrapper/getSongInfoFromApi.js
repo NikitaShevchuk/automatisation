@@ -24,12 +24,72 @@ export const getSongInfoFromApi = async (songId) => {
                 }
                 allSingers.push(newSinger);
             });
+        } else if (songInfoFromApi.artist_names.includes("x")) {
+            const splitedNames = songInfoFromApi.artist_names.split("x");
+            splitedNames.forEach((name) => {
+                let newSinger = name.trim();
+                if (newSinger.includes(",")) {
+                    newSinger.split(",").forEach((singer) => {
+                        allSingers.push(singer.trim());
+                    });
+                    return;
+                }
+                allSingers.push(newSinger);
+            });
+        } else if (songInfoFromApi.artist_names.includes("X")) {
+            const splitedNames = songInfoFromApi.artist_names.split("X");
+            splitedNames.forEach((name) => {
+                let newSinger = name.trim();
+                if (newSinger.includes(",")) {
+                    newSinger.split(",").forEach((singer) => {
+                        allSingers.push(singer.trim());
+                    });
+                    return;
+                }
+                allSingers.push(newSinger);
+            });
         } else {
             allSingers.push(songInfoFromApi.artist_names);
         }
     } else {
         if (songInfoFromApi.artist_names.split("(Ft.")[0].includes("&")) {
             const splitedNames = songInfoFromApi.artist_names.split("(Ft.")[0].split("&");
+            splitedNames.forEach((name) => {
+                let newSinger = name.trim();
+                if (newSinger.includes(",")) {
+                    newSinger.split(",").forEach((singer) => {
+                        allSingers.push(singer.trim());
+                    });
+                    return;
+                }
+                allSingers.push(newSinger);
+            });
+        } else if (songInfoFromApi.artist_names.split("(Ft.")[0].includes("&")) {
+            const splitedNames = songInfoFromApi.artist_names.split("(Ft.")[0].split("&");
+            splitedNames.forEach((name) => {
+                let newSinger = name.trim();
+                if (newSinger.includes(",")) {
+                    newSinger.split(",").forEach((singer) => {
+                        allSingers.push(singer.trim());
+                    });
+                    return;
+                }
+                allSingers.push(newSinger);
+            });
+        } else if (songInfoFromApi.artist_names.split("(Ft.")[0].includes("x")) {
+            const splitedNames = songInfoFromApi.artist_names.split("(Ft.")[0].split("x");
+            splitedNames.forEach((name) => {
+                let newSinger = name.trim();
+                if (newSinger.includes(",")) {
+                    newSinger.split(",").forEach((singer) => {
+                        allSingers.push(singer.trim());
+                    });
+                    return;
+                }
+                allSingers.push(newSinger);
+            });
+        } else if (songInfoFromApi.artist_names.split("(Ft.")[0].includes("X")) {
+            const splitedNames = songInfoFromApi.artist_names.split("(Ft.")[0].split("X");
             splitedNames.forEach((name) => {
                 let newSinger = name.trim();
                 if (newSinger.includes(",")) {

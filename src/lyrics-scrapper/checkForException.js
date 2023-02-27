@@ -24,6 +24,12 @@ const exceptions = [
     "live version",
     "Acoustic",
     "acoustic",
+    "Intro",
+    "Outro",
+    "intro",
+    "outro",
+    "INTRO",
+    "OUTRO",
 ];
 
 export const checkForException = (title) => {
