@@ -82,25 +82,20 @@ const exceptions = [
     "REFRAIN",
     "Refrain",
     "refrain",
-    "",
 ];
 
 export const fixText = (text) => {
     let fixedText = text;
 
     exceptions.forEach((exception) => {
-        const regexParenthesis = new RegExp(`\\(.*?\\b${exception}\\b.*?\\)`, "gi");
-        fixedText = fixedText.replace(regexParenthesis, "");
-        const regexColon = new RegExp(`\\b${exception}\\b\\s*:`, "gi");
-        fixedText = fixedText.replace(regexColon, "");
-        const regexColonWithSpace = new RegExp(`\\b${exception}\\b\\s*:\\s*`, "gi");
-        fixedText = fixedText.replace(regexColonWithSpace, "");
-        fixedText = fixedText.replace(new RegExp(exception, "gi"), "");
+        fixedText = fixedText.replace(`(${exception})`, "");
+        fixedText = fixedText.replace(`${exception}:`, "");
+        fixedText = fixedText.replace(`${exception} :`, "");
         const firstUpper = exception.split("");
         firstUpper[0] = firstUpper[0].toUpperCase();
-        fixedText = fixedText.replace(new RegExp(firstUpper.join(""), "g"), "");
-        fixedText = fixedText.replace(new RegExp(exception.toLowerCase(), "g"), "");
-        fixedText = fixedText.replace(new RegExp(exception.toUpperCase(), "g"), "");
+        fixedText = fixedText.replace(firstUpper.join(""), "");
+        fixedText = fixedText.replace(exception.toLowerCase(), "");
+        fixedText = fixedText.replace(exception.toUpperCase(), "");
     });
 
     return fixedText
