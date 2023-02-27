@@ -101,6 +101,7 @@ export const fixText = (text) => {
     return fixedText
         .replace(/&nbsp/g, " ")
         .replace(/[^A-Za-z0-9\s![?:,](")'\r\n|\r|\n]/g, "")
+        .replace(/-{2,}/g, "")
         .replace(/\(x\d+\)/g, "")
         .replace(/\(X\d+\)/g, "")
         .replace(/\(\d+x\)/g, "")
