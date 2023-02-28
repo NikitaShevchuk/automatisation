@@ -41,12 +41,6 @@ export const lyricsScrapper = async (geniusLink) => {
     if (language === "Русский") {
         console.log(`Detected song with РУСНЯВА МОВА ${title}`);
         return undefined;
-    } else if (language === "Японский") {
-        console.log(`Detected song with Японский ${title}`);
-        return undefined;
-    } else if (language === "Китайский") {
-        console.log(`Detected song with Китайский ${title}`);
-        return undefined;
     }
 
     let includesGenius = false;
