@@ -61,8 +61,9 @@ const exceptions = [
     "pre-refrain 2",
     "Pre-Refrain 1",
     "Pre-Refrain 2",
-    "()",
     "(…)",
+    "(..)",
+    "()",
 ];
 
 export const fixText = (text) => {

@@ -1,108 +1,40 @@
 import axios from "axios";
 
-export const getSongInfoFromApi = async (songId) => {
-    const songInfoFromApi = await axios
+const getSongs = async (songId) => {
+    return await axios
         .get(`https://api.genius.com/songs/${songId}`, {
             headers: {
                 Authorization: `Bearer ${process.env.GENIUSAPI_KEY}`,
             },
         })
         .then((response) => response.data.response.song);
+};
+
+export const getSongInfoFromApi = async (songId) => {
+    const songInfoFromApi = await getSongs(songId);
+
+    const { artist_names } = songInfoFromApi;
 
     let allSingers = [];
 
-    if (!songInfoFromApi.artist_names.includes("(Ft.")) {
-        if (songInfoFromApi.artist_names.includes("&")) {
-            const splitedNames = songInfoFromApi.artist_names.split("&");
-            splitedNames.forEach((name) => {
-                let newSinger = name.trim();
-                if (newSinger.includes(",")) {
-                    newSinger.split(",").forEach((singer) => {
-                        allSingers.push(singer.trim());
-                    });
-                    return;
-                }
-                allSingers.push(newSinger);
-            });
-        } else if (songInfoFromApi.artist_names.includes("x")) {
-            const splitedNames = songInfoFromApi.artist_names.split("x");
-            splitedNames.forEach((name) => {
-                let newSinger = name.trim();
-                if (newSinger.includes(",")) {
-                    newSinger.split(",").forEach((singer) => {
-                        allSingers.push(singer.trim());
-                    });
-                    return;
-                }
-                allSingers.push(newSinger);
-            });
-        } else if (songInfoFromApi.artist_names.includes("X")) {
-            const splitedNames = songInfoFromApi.artist_names.split("X");
-            splitedNames.forEach((name) => {
-                let newSinger = name.trim();
-                if (newSinger.includes(",")) {
-                    newSinger.split(",").forEach((singer) => {
-                        allSingers.push(singer.trim());
-                    });
-                    return;
-                }
-                allSingers.push(newSinger);
-            });
-        } else {
-            allSingers.push(songInfoFromApi.artist_names);
-        }
+    function splitString(inputString) {
+        let splitSymbols = ["&", "(?<!\\S)x(?!\\S)", "(?<!\\S)X(?!\\S)", "/", ","];
+        let pattern = new RegExp(splitSymbols.join("|"), "g");
+        let result = inputString.split(pattern);
+        return result;
+    }
+
+    const splitBySymbolAndAdd = (namesString) => {
+        const artists = splitString(namesString);
+        artists.forEach((artist) => {
+            if (artist) allSingers.push(artist.trim());
+        });
+    };
+
+    if (!artist_names.includes("(Ft.")) {
+        splitBySymbolAndAdd(artist_names);
     } else {
-        if (songInfoFromApi.artist_names.split("(Ft.")[0].includes("&")) {
-            const splitedNames = songInfoFromApi.artist_names.split("(Ft.")[0].split("&");
-            splitedNames.forEach((name) => {
-                let newSinger = name.trim();
-                if (newSinger.includes(",")) {
-                    newSinger.split(",").forEach((singer) => {
-                        allSingers.push(singer.trim());
-                    });
-                    return;
-                }
-                allSingers.push(newSinger);
-            });
-        } else if (songInfoFromApi.artist_names.split("(Ft.")[0].includes("&")) {
-            const splitedNames = songInfoFromApi.artist_names.split("(Ft.")[0].split("&");
-            splitedNames.forEach((name) => {
-                let newSinger = name.trim();
-                if (newSinger.includes(",")) {
-                    newSinger.split(",").forEach((singer) => {
-                        allSingers.push(singer.trim());
-                    });
-                    return;
-                }
-                allSingers.push(newSinger);
-            });
-        } else if (songInfoFromApi.artist_names.split("(Ft.")[0].includes("x")) {
-            const splitedNames = songInfoFromApi.artist_names.split("(Ft.")[0].split("x");
-            splitedNames.forEach((name) => {
-                let newSinger = name.trim();
-                if (newSinger.includes(",")) {
-                    newSinger.split(",").forEach((singer) => {
-                        allSingers.push(singer.trim());
-                    });
-                    return;
-                }
-                allSingers.push(newSinger);
-            });
-        } else if (songInfoFromApi.artist_names.split("(Ft.")[0].includes("X")) {
-            const splitedNames = songInfoFromApi.artist_names.split("(Ft.")[0].split("X");
-            splitedNames.forEach((name) => {
-                let newSinger = name.trim();
-                if (newSinger.includes(",")) {
-                    newSinger.split(",").forEach((singer) => {
-                        allSingers.push(singer.trim());
-                    });
-                    return;
-                }
-                allSingers.push(newSinger);
-            });
-        } else {
-            allSingers.push(songInfoFromApi.artist_names.split("(Ft.")[0].trim());
-        }
+        splitBySymbolAndAdd(artist_names.split("(Ft.")[0]);
         songInfoFromApi.featured_artists.forEach((artist) => {
             allSingers.push(artist.name);
         });
