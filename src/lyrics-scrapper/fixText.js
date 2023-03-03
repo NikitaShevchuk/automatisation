@@ -61,8 +61,14 @@ const exceptions = [
     "pre-refrain 2",
     "Pre-Refrain 1",
     "Pre-Refrain 2",
+    "ref",
+    "ref.",
+    "ReF",
+    "refren",
+    "solo",
     "(…)",
     "(..)",
+    "(...)",
     "()",
 ];
 
@@ -110,6 +116,7 @@ export const fixText = (text) => {
 
     return fixedText
         .replace(/&nbsp/g, " ")
+        .replace(/\d+\./g, "")
         .replace(/[^A-Za-z0-9\s![?:,](")'\r\n|\r|\n]/g, "")
         .replace(/-{2,}/g, "")
         .replace(/\*/g, "")
@@ -118,20 +125,23 @@ export const fixText = (text) => {
         .replace(/\[[^\]]*\](?::\s*|\s*:\s*)/g, "")
         .replace(/\{[^\}]*\}/g, "")
 
-        .replace(/\(x\d+\)/g, "")
-        .replace(/\(X\d+\)/g, "")
-        .replace(/\(\d+x\)/g, "")
-        .replace(/\(\d+X\)/g, "")
-        .replace(/x\d+/g, "")
-        .replace(/X\d+/g, "")
-        .replace(/\d+x/g, "")
-        .replace(/\d+X/g, "")
+        .replace(/\(x\s*\d+\)/g, "")
+        .replace(/\(X\s*\d+\)/g, "")
+        .replace(/\(\d+\s*x\)/g, "")
+        .replace(/\(\d+\s*X\)/g, "")
+        .replace(/x\s*\d+/g, "")
+        .replace(/X\s*\d+/g, "")
+        .replace(/\d+\s*x/g, "")
+        .replace(/\d+\s*X/g, "")
 
-        .replace(/\(×\d+\)/g, "")
-        .replace(/\(\d+×\)/g, "")
-        .replace(/×\d+/g, "")
-        .replace(/\d+×/g, "")
+        .replace(/\(×\s*\d+\)/g, "")
+        .replace(/\(\d+\s*×\)/g, "")
+        .replace(/×\s*\d+/g, "")
+        .replace(/\d+\s*×/g, "")
 
         .replace(/^\s*$\n/gm, "\n")
+        .replace(/^:*$\n/gm, "\n")
+        .replace(/\[\]/g, "")
+        .replace(/\n\d+\n/g, "\n")
         .replace(/(\n{2,})/g, "\n\n");
 };

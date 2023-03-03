@@ -18,7 +18,7 @@ export const getSongInfoFromApi = async (songId) => {
     let allSingers = [];
 
     function splitString(inputString) {
-        let splitSymbols = ["&", "(?<!\\S)x(?!\\S)", "(?<!\\S)X(?!\\S)", "/", ","];
+        let splitSymbols = ["&", "(?<!\\S)x(?!\\S)", "(?<!\\S)X(?!\\S)", "/", ","]; // <- add symbols by which artist names will be separated
         let pattern = new RegExp(splitSymbols.join("|"), "g");
         let result = inputString.split(pattern);
         return result;
