@@ -48,7 +48,6 @@ const exceptions = [
     "Instrumental Vers",
     "instrumental vers",
     "Instrumental",
-    "",
     "\x91",
     "bis",
     "pont",
