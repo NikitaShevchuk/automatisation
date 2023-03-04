@@ -104,7 +104,7 @@ const exceptions = [
     "verse",
     "Vers 1 -",
     "Vers 2 -",
-    "vers ",
+    "Vers",
     "vers",
     "{Czoug]",
     "PRE-CHORUS",
