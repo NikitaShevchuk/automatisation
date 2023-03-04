@@ -37,8 +37,8 @@ export const getSongInfoFromApi = async (songId) => {
     } else {
         splitBySymbolAndAdd(artist_names.split("(Ft.")[0]);
         songInfoFromApi.featured_artists.forEach((artist) => {
-            if (!!artist.match(pattern)) {
-                splitBySymbolAndAdd(artist);
+            if (!!artist.name.match(pattern)) {
+                splitBySymbolAndAdd(artist.name);
                 return;
             }
             allSingers.push(artist.name);
