@@ -121,8 +121,7 @@ const exceptions = [
     "( )",
     "[]",
     "[ ]",
-    "[",
-    "]",
+    "I I I",
 ];
 
 export const fixText = (text) => {

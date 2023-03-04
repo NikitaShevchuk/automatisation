@@ -1,4 +1,5 @@
 import { load } from "cheerio";
+import open from "open";
 import { axiosAdminInstance } from "./axios-instances/axiosAdminInstance.js";
 import { axiosInstance } from "./axios-instances/axiosInstance.js";
 import { patchRequest } from "./patchTheSong.js";
@@ -77,6 +78,8 @@ export const addNewSong = async ({ title, text, singers, language, singersOrder,
     });
 
     const result = await patchRequest(songId, responseInstance);
+
+    if (result.ok) open(`https://pesnihi.com/sing/create/${songId}`);
 
     console.log(
         result.ok
