@@ -60,6 +60,10 @@ export const addNewSong = async ({ title, text, singers, language, singersOrder,
         extendedTitle = title.split("(")[1].split(")")[0];
         title = title.split("(")[0];
     }
+    if (title.includes("[")) {
+        extendedTitle = title.split("[")[1].split("]")[0];
+        title = title.split("[")[0];
+    }
 
     const responseInstance = await getResponseInstance({
         songId,

@@ -1,5 +1,8 @@
 import axios from "axios";
 
+let splitSymbols = ["&", "(?<!\\S)x(?!\\S)", "(?<!\\S)X(?!\\S)", "/", ",", "\\+", "\\(", "\\)"]; // <- add symbols by which artist names will be separated
+let pattern = new RegExp(splitSymbols.join("|"), "g");
+
 const getSongs = async (songId) => {
     return await axios
         .get(`https://api.genius.com/songs/${songId}`, {
@@ -18,8 +21,6 @@ export const getSongInfoFromApi = async (songId) => {
     let allSingers = [];
 
     function splitString(inputString) {
-        let splitSymbols = ["&", "(?<!\\S)x(?!\\S)", "(?<!\\S)X(?!\\S)", "/", ","]; // <- add symbols by which artist names will be separated
-        let pattern = new RegExp(splitSymbols.join("|"), "g");
         let result = inputString.split(pattern);
         return result;
     }
@@ -36,6 +37,10 @@ export const getSongInfoFromApi = async (songId) => {
     } else {
         splitBySymbolAndAdd(artist_names.split("(Ft.")[0]);
         songInfoFromApi.featured_artists.forEach((artist) => {
+            if (!!artist.match(pattern)) {
+                splitBySymbolAndAdd(artist);
+                return;
+            }
             allSingers.push(artist.name);
         });
     }

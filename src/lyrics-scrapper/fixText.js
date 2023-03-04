@@ -1,5 +1,14 @@
 const exceptions = [
-    "couplet",
+    "Ref./ x2",
+    "Ref./ x4",
+    "Vers 1 -",
+    "Vers 2 -",
+    "{Verse 1]",
+    "|Refrain x2]",
+    "Verse 1",
+    "Ref.:",
+    "Zwrotka II",
+    "Zwrotka I",
     "1ER Couplet",
     "1er Couplet",
     "1er COUPLET",
@@ -7,15 +16,18 @@ const exceptions = [
     "2ème COUPLET",
     "2ème Couplet",
     "2ème couplet",
+    "couplet 1",
+    "couplet 2",
+    "couplet",
     "hook",
-    "chor",
     "chorus",
-    "cuplet",
+    "Chorus",
+    "chor",
     "First Cuplet",
     "first cuplet",
     "First Couplet",
     "first couplet",
-    "vers ",
+    "cuplet",
     "sample ",
     "repeated",
     "Prodigy",
@@ -26,50 +38,52 @@ const exceptions = [
     "RMX",
     "Tracklist",
     "Skit",
-    "Live",
     "Live Version",
     "live version",
     "Live Vers",
     "live vers",
-    "Instrumental",
+    "Live",
     "Instrumental Version",
     "instrumental version",
     "Instrumental Vers",
     "instrumental vers",
-    "refrain",
-    "",
+    "Instrumental",
+    "",
     "\x91",
     "bis",
     "pont",
     "bridge",
     "(?)",
-    "couplet 1",
-    "couplet 2",
+    "pre-refrain 1",
+    "pre-refrain 2",
+    "Pre-Refrain 1",
+    "Pre-Refrain 2",
     "(Refrain x2)",
     "(Refrain x1)",
     "intro",
     "refrain x1",
     "refrain x2",
+    "refrain",
     "lyrics",
-    "verse",
     "verse 1",
     "verse 2",
+    "verse",
+    "vers ",
     "PRE-CHORUS",
     "pre-chorus",
     "Pre-Chorus",
-    "pre-refrain 1",
-    "pre-refrain 2",
-    "Pre-Refrain 1",
-    "Pre-Refrain 2",
+    "refren",
     "ref",
     "ref.",
     "ReF",
-    "refren",
     "solo",
+    "(....)",
+    "(...)",
     "(…)",
     "(..)",
-    "(...)",
     "()",
+    "[]",
+    "[ ]",
 ];
 
 export const fixText = (text) => {
@@ -117,15 +131,17 @@ export const fixText = (text) => {
     return fixedText
         .replace(/&nbsp/g, " ")
         .replace(/\d+\./g, "")
+        .replace(/\./g, "")
         .replace(/[^A-Za-z0-9\s![?:,](")'\r\n|\r|\n]/g, "")
         .replace(/-{2,}/g, "")
         .replace(/\*/g, "")
-        .replace(/\./g, "")
         .replace(/\[[^\]]*\]/g, "")
         .replace(/\[[^\]]*\](?::\s*|\s*:\s*)/g, "")
         .replace(/\{[^\}]*\}/g, "")
 
         .replace(/\(x\s*\d+\)/g, "")
+        .replace(/\(\*\s*\d+\)/g, "")
+        .replace(/\*\s*\d+/g, "")
         .replace(/\(X\s*\d+\)/g, "")
         .replace(/\(\d+\s*x\)/g, "")
         .replace(/\(\d+\s*X\)/g, "")
@@ -143,5 +159,6 @@ export const fixText = (text) => {
         .replace(/^:*$\n/gm, "\n")
         .replace(/\[\]/g, "")
         .replace(/\n\d+\n/g, "\n")
+        .replace(/\d+:/g, "")
         .replace(/(\n{2,})/g, "\n\n");
 };
