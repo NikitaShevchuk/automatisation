@@ -18,7 +18,7 @@ const start = async () => {
                     // if (index > 10) return true;
 
                     await new Promise((resolve) => {
-                        setTimeout(resolve, 2000 * index);
+                        setTimeout(resolve, 4500 * index);
                     });
                     const songInfo = await lyricsScrapper(diff.link);
 

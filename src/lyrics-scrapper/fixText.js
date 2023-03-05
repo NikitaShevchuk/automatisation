@@ -73,17 +73,22 @@ const exceptions = [
     "(refren)",
     "REFREN (2x):",
     "refren",
+    "(Refräng)",
+    "Refräng",
+    "(Refrão)",
+    "(refrão)",
+    "Refrão",
+    "refrão",
     "Ref./ x2",
     "Ref./ x4",
+    "(Refr. 4x)",
+    "Refr:",
     "Ref.:",
     "Ref:",
     "ref.",
     "ReF",
     "ref",
-    "(Refrão)",
-    "(refrão)",
-    "Refrão",
-    "refrão",
+    "Ref",
     "intro",
     "lyrics",
     "{Verse 1]",
@@ -102,8 +107,13 @@ const exceptions = [
     "verse 1",
     "verse 2",
     "verse",
+    "(Vers 1)",
     "Vers 1 -",
     "Vers 2 -",
+    "Vers 1",
+    "Vers 2",
+    "Vers 3",
+    "Vers 4",
     "Vers",
     "vers",
     "{Czoug]",
@@ -117,6 +127,7 @@ const exceptions = [
     "(...)",
     "(…)",
     "(..)",
+    "(x)",
     "()",
     "( )",
     "[]",
@@ -170,7 +181,7 @@ export const fixText = (text) => {
         .replace(/&nbsp/g, " ")
         .replace(/\d+\./g, "")
         .replace(/\./g, "")
-        .replace(/[^A-Za-z0-9\s![?:,](")'\r\n|\r|\n]/g, "")
+        .replace(/[^A-Za-z0-9\s![?:,]\("\)'\r\n|\r|\n]/g, "")
         .replace(/-{2,}/g, "")
         .replace(/\*/g, "")
         .replace(/\[[^\]]*\]/g, "")
