@@ -22,6 +22,7 @@ const exceptions = [
     "SNIPPET",
     "snippet",
     "RMX",
+    "Rmx",
     "rmx",
     "Tracklist",
     "TRACKLIST",
