@@ -2,8 +2,8 @@ const exceptions = [
     "припев",
     "ORKIESTRA",
     "Akustycznie",
-    "(Zwrotka)",
-    "(Zwrotka 1)",
+    "Zwrotka",
+    "Zwrotka 1",
     "Zwrotka #1",
     "Zwrotka #2",
     "Zwrotka#1",
@@ -21,23 +21,18 @@ const exceptions = [
     "first cuplet",
     "First Couplet",
     "first couplet",
-    "[Couplet 1]:",
-    "[Couplet 2]:",
+    "\\[Couplet 1\\]:",
+    "\\[Couplet 2\\]:",
     "couplet 1",
     "couplet 2",
     "couplet",
-    "==Credit's==",
-    "Credit's",
-    "Credits",
-    "Credit",
     "hook",
     "cuplet",
     "sample ",
-    "(Repeat)",
+    "Repeat",
     "repeated",
     "repeat",
     "Prodigy",
-    "*",
     "SNIPPET",
     "ACOUSTIC",
     "REMIX",
@@ -58,47 +53,46 @@ const exceptions = [
     "bis",
     "pont",
     "bridge",
-    "(?)",
     "Pre-Refrain 1",
     "Pre-Refrain 2",
     "pre-refrain 1",
     "pre-refrain 2",
-    "|Refrain x2]",
-    "(Refrain x2)",
-    "(Refrain x1)",
+    "\\|Refrain x2\\]",
+    "Refrain x2",
+    "Refrain x1",
     "REFRAIN :",
     "Refrain :",
     "refrain x1",
     "refrain x2",
     "refrain",
-    "{Refren x2]",
-    "(Refren)",
-    "(refren)",
-    "REFREN (2x):",
+    "\\{Refren x2\\]",
+    "Refren",
     "refren",
-    "(Refräng)",
+    "REFREN \\(2x\\):",
+    "refren",
     "Refräng",
-    "(Refrão)",
-    "(refrão)",
+    "Refräng",
     "Refrão",
     "refrão",
-    "Ref./ x2",
-    "Ref./ x4",
-    "(Refr. 4x)",
+    "Refrão",
+    "refrão",
+    "Ref\\./ x2",
+    "Ref\\./ x4",
+    "Refr\\. 4x",
     "Refr:",
-    "Ref.:",
+    "Ref\\.:",
     "Ref:",
-    "ref.",
+    "ref\\.",
     "ReF",
     "ref",
     "Ref",
     "intro",
     "lyrics",
-    "{Verse 1]",
-    "(Verse 1)",
-    "(Verse 2)",
-    "(1. verse)",
-    "(2. verse)",
+    "\\{Verse 1\\]",
+    "Verse 1",
+    "Verse 2",
+    "1\\. verse",
+    "2\\. verse",
     "VERSE : 1",
     "VERSE : 2",
     "Verse : 1",
@@ -112,7 +106,7 @@ const exceptions = [
     "verse 1",
     "verse 2",
     "verse",
-    "(Vers 1)",
+    "Vers 1",
     "1 VERS:",
     "2 VERS:",
     "Vers 1 -",
@@ -123,7 +117,7 @@ const exceptions = [
     "Vers 4",
     "Vers",
     "vers",
-    "{Czoug]",
+    "\\{Czoug\\]",
     "PRE-CHORUS",
     "pre-chorus",
     "Pre-Chorus",
@@ -131,8 +125,8 @@ const exceptions = [
     "chorus",
     "Chorus",
     "chor",
-    "(Solo)",
-    "(solo)",
+    "Solo",
+    "solo",
     "solo",
     "OMKVÆD:",
     "OMKVÆD",
@@ -144,65 +138,73 @@ const exceptions = [
     "C STYKKE:",
     "Dialog 1",
     "Dialog 2",
-    "(....)",
-    "(...)",
-    "(…)",
-    "(..)",
-    "(x)",
-    "(2)",
-    "(3)",
-    "(4)",
-    "()",
-    "( )",
-    "[]",
-    "[ ]",
+    "\\.\\.\\.\\.",
+    "\\.\\.\\.",
+    "…",
+    "\\.\\.",
     "I I I",
+    "==Credit's==",
 ];
 
 export const fixText = (text) => {
     let fixedText = text.replace(/\([^()]*:[^()]*\)/g, "");
+    const createRegExp = (phrase) => new RegExp(phrase, "g");
 
     exceptions.forEach((exception) => {
-        fixedText = fixedText.replace(`(${exception})`, "");
-        fixedText = fixedText.replace(`${exception}:`, "");
-        fixedText = fixedText.replace(`${exception} :`, "");
-        fixedText = fixedText.replace(`(${exception}) :`, "");
-        fixedText = fixedText.replace(`(${exception}):`, "");
+        fixedText = fixedText.replace(createRegExp(`\\(${exception}\\)`), "");
+        fixedText = fixedText.replace(createRegExp(`${exception}:`), "");
+        fixedText = fixedText.replace(createRegExp(`${exception} :`), "");
+        fixedText = fixedText.replace(createRegExp(`\\(${exception}\\) :`), "");
+        fixedText = fixedText.replace(createRegExp(`\\(${exception}\\):`), "");
 
         // lower case
-        fixedText = fixedText.replace(`(${exception.toLowerCase()})`, "");
-        fixedText = fixedText.replace(`${exception.toLowerCase()}:`, "");
-        fixedText = fixedText.replace(`${exception.toLowerCase()} :`, "");
-        fixedText = fixedText.replace(`(${exception.toLowerCase()}) :`, "");
-        fixedText = fixedText.replace(`(${exception.toLowerCase()}):`, "");
+        fixedText = fixedText.replace(createRegExp(`\\(${exception.toLowerCase()}\\)`), "");
+        fixedText = fixedText.replace(createRegExp(`${exception.toLowerCase()}:`), "");
+        fixedText = fixedText.replace(createRegExp(`${exception.toLowerCase()} :`), "");
+        fixedText = fixedText.replace(createRegExp(`\\(${exception.toLowerCase()}\\) :`), "");
+        fixedText = fixedText.replace(createRegExp(`\\(${exception.toLowerCase()}\\):`), "");
 
         // upper case
-        fixedText = fixedText.replace(`(${exception.toUpperCase()})`, "");
-        fixedText = fixedText.replace(`${exception.toUpperCase()}:`, "");
-        fixedText = fixedText.replace(`${exception.toUpperCase()} :`, "");
-        fixedText = fixedText.replace(`(${exception.toUpperCase()}) :`, "");
-        fixedText = fixedText.replace(`(${exception.toUpperCase()}):`, "");
+        fixedText = fixedText.replace(createRegExp(`\\(${exception.toUpperCase()}\\)`), "");
+        fixedText = fixedText.replace(createRegExp(`${exception.toUpperCase()}:`), "");
+        fixedText = fixedText.replace(createRegExp(`${exception.toUpperCase()} :`), "");
+        fixedText = fixedText.replace(createRegExp(`\\(${exception.toUpperCase()}\\) :`), "");
+        fixedText = fixedText.replace(createRegExp(`\\(${exception.toUpperCase()}\\):`), "");
 
         // with first upper case
         const firstUpperWithBrackets = exception.split("");
         firstUpperWithBrackets[0] = firstUpperWithBrackets[0].toUpperCase();
-        fixedText = fixedText.replace(`(${firstUpperWithBrackets.join("")})`, "");
-        fixedText = fixedText.replace(`${firstUpperWithBrackets.join("")}:`, "");
-        fixedText = fixedText.replace(`${firstUpperWithBrackets.join("")} :`, "");
-        fixedText = fixedText.replace(`(${firstUpperWithBrackets.join("")}) :`, "");
-        fixedText = fixedText.replace(`(${firstUpperWithBrackets.join("")}):`, "");
+        fixedText = fixedText.replace(createRegExp(`\\(${firstUpperWithBrackets.join("")}\\)`), "");
+        fixedText = fixedText.replace(createRegExp(`${firstUpperWithBrackets.join("")}:`), "");
+        fixedText = fixedText.replace(createRegExp(`${firstUpperWithBrackets.join("")} :`), "");
+        fixedText = fixedText.replace(
+            createRegExp(`\\(${firstUpperWithBrackets.join("")}\\) :`),
+            ""
+        );
+        fixedText = fixedText.replace(
+            createRegExp(`\\(${firstUpperWithBrackets.join("")}\\):`),
+            ""
+        );
 
         const firstUpper = exception.split("");
         firstUpper[0] = firstUpper[0].toUpperCase();
-        fixedText = fixedText.replace(firstUpper.join(""), "");
-        fixedText = fixedText.replace(exception.toLowerCase(), "");
-        fixedText = fixedText.replace(exception.toUpperCase(), "");
+        fixedText = fixedText.replace(createRegExp(firstUpper.join("")), "");
+        fixedText = fixedText.replace(createRegExp(exception.toLowerCase()), "");
+        fixedText = fixedText.replace(createRegExp(exception.toUpperCase()), "");
 
-        fixedText = fixedText.replace(exception, "");
+        fixedText = fixedText.replace(createRegExp(exception), "");
     });
 
     return fixedText
         .replace(/&nbsp/g, "")
+        .replace(/\(\?\)/g, "")
+        .replace(/\*/g, "")
+        .replace(/\(\)/g, "")
+        .replace(/\( \)/g, "")
+        .replace(/\[\]/g, "")
+        .replace(/\[ \]/g, "")
+        .replace(/\(\d*\)/g, "")
+        .replace(/\(x\)/g, "")
         .replace(/\d+\./g, "")
         .replace(/\./g, "")
         .replace(/[^A-Za-z0-9\s![?:,]\("\)'\r\n|\r|\n]/g, "")
