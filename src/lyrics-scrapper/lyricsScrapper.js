@@ -10,6 +10,8 @@ import { getSongInfoFromApi } from "./getSongInfoFromApi.js";
 export const lyricsScrapper = async (geniusLink) => {
     let text = await getLyrics(geniusLink);
 
+    if (!text) return undefined;
+
     const pageHtml = await axios.get(geniusLink).then((response) => response.data);
 
     const $ = load(pageHtml);
