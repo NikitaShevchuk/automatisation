@@ -167,7 +167,7 @@ export const fixText = (text) => {
     });
 
     return fixedText
-        .replace(/&nbsp/g, " ")
+        .replace(/&nbsp/g, "")
         .replace(/\d+\./g, "")
         .replace(/\./g, "")
         .replace(/[^A-Za-z0-9\s![?:,](")'\r\n|\r|\n]/g, "")
@@ -193,11 +193,11 @@ export const fixText = (text) => {
         .replace(/×\s*\d+/g, "")
         .replace(/\d+\s*×/g, "")
 
-        .replace(/^\s*$\n/gm, "\n")
-        .replace(/^:*$\n/gm, "\n")
-        .replace(/\[\]/g, "")
+        .replace(/(\n)\s+(\n)/g, "$1$2")
+        .replace(/\n:\n?/g, "\n")
+        .replace(/\[\]/g, "\n")
         .replace(/\n\d+\n/g, "\n")
-        .replace(/\n\?*\n/g, "\n")
+        .replace(/\n\?\n?/g, "\n")
         .replace(/\d+:/g, "")
-        .replace(/(\n{2,})/g, "\n\n");
+        .replace(/(\n{3,})/g, "\n\n");
 };
