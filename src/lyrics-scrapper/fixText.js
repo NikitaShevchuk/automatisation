@@ -148,6 +148,7 @@ const exceptions = [
 
 export const fixText = (text) => {
     let fixedText = text.replace(/\([^()]*:[^()]*\)/g, "");
+    fixedText = fixedText.replace(/\([^()]*Music by[^()]*\)/g, "");
     const createRegExp = (phrase) => new RegExp(phrase, "g");
 
     exceptions.forEach((exception) => {
